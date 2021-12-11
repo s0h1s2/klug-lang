@@ -13,8 +13,6 @@ void initChunk(Chunk* chunk)
     chunk->lines=NULL;
     initValueArray(&chunk->constants);
 
-
-
 }
 void writeChunk(Chunk* chunk,uint8_t byte,int line){
     if (chunk->capacity<chunk->count+1)
@@ -42,3 +40,4 @@ int addConstants(Chunk* chunk,Value value)
     
     return chunk->constants.count-1;
 }
+
