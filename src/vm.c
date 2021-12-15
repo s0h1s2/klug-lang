@@ -1,14 +1,15 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include "./includes/vm.h"
-#include "./includes/common.h"
 #include "./includes/debug.h"
-
+#include "./includes/common.h"
+#include "./includes/memory.h"
+#include "./includes/compiler.h"
 
 VM vm;
 static void resetStack(){
-    vm.stackTop=vm.stack;
 
+    vm.stackTop=vm.stack;
 }
 void freeVM(){
 
@@ -17,12 +18,13 @@ void initVM(){
     resetStack();
 }
 void push(Value value){
+
     *vm.stackTop=value;
     vm.stackTop++;
-
 }
 Value pop(){
     vm.stackTop--;
+
     return *vm.stackTop;
 
 }
@@ -68,7 +70,6 @@ static InterpretResult run(){
             }
             case OP_SUBTRACT:{
                 BINARY_OP(-);
-
                 break;
 
             }
@@ -96,16 +97,14 @@ static InterpretResult run(){
 
 #undef READ_BYTE
 #undef READ_CONSTANT
+#undef BINARY_OP
 
 }
-//OP_ADD,
-//    OP_SUBTRACT,
-//    OP_MULTIPLY,
-//    OP_DIVIDE
-//
-InterpretResult interpret(Chunk *chunk) {
-    vm.chunk=chunk;
-    vm.ip=vm.chunk->code;
-    return run();
+
+InterpretResult interpret(const char *source)
+{
+    compile(source);
+
+    return INTERPRET_OK;
 
 }

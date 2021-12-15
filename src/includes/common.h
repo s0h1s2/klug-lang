@@ -3,6 +3,5 @@
 #include <stdio.h>
 #include <stddef.h>
 #include <stdint.h>
-#define DEBUG_TRACE
-
+//#define DEBUG_TRACE false
 #endif
