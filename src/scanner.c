@@ -70,7 +70,7 @@ static void skipWhiteSpace(){
                 break;
             case '/':
                 if (peekNext()=='/'){
-                    while (peek()!="\n" && !isAtEnd())advance();
+                    while (peek()!='\n' && !isAtEnd())advance();
 
                 }else{
                     return;
@@ -165,7 +165,8 @@ static TokenType identifierType(){
 
 static Token identifier(){
     while(isAlpha(peek()) || isDigit(peek())) advance();
-    return makeToken(indentifierType())
+    return makeToken(identifierType());
+
 }
 Token scanToken(){
     skipWhiteSpace();
